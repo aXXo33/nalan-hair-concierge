@@ -5,17 +5,21 @@ import Lightbox from '../components/Lightbox';
 
 type Item = { src: string; category: string; label: string };
 
-// Real salon images live in /public/assets/gallery/.
+// Approved salon images live in /public/assets/gallery/.
 // If a file is missing, the card automatically shows a soft elegant placeholder.
 const items: Item[] = [
-  { src: '/assets/gallery/bridal-1.jpg',     category: 'Bridal',     label: 'Bridal' },
-  { src: '/assets/gallery/balayage-1.jpg',   category: 'Balayage',   label: 'Balayage' },
-  { src: '/assets/gallery/blonde-1.jpg',     category: 'Blonde',     label: 'Blonde' },
-  { src: '/assets/gallery/extensions-1.jpg', category: 'Extensions', label: 'Extensions' },
-  { src: '/assets/gallery/event-1.jpg',      category: 'Event Hair', label: 'Event Hair' },
+  { src: '/assets/gallery/bridal-1.JPEG',     category: 'Bridal',     label: 'Bridal' },
+  { src: '/assets/gallery/bridal-2.JPEG',     category: 'Bridal',     label: 'Bridal' },
+  { src: '/assets/gallery/balayage-1.JPEG',   category: 'Balayage',   label: 'Balayage' },
+  { src: '/assets/gallery/balayage-2.JPEG',   category: 'Balayage',   label: 'Balayage' },
+  { src: '/assets/gallery/event-1.JPEG',      category: 'Event Hair', label: 'Event Hair' },
+  { src: '/assets/gallery/event-2.JPEG',      category: 'Event Hair', label: 'Event Hair' },
+  { src: '/assets/gallery/event-3.JPEG',      category: 'Event Hair', label: 'Event Hair' },
+  { src: '/assets/gallery/extensions-1.JPEG', category: 'Extensions', label: 'Extensions' },
+  { src: '/assets/gallery/extensions-2.JPEG', category: 'Extensions', label: 'Extensions' },
 ];
 
-const filters = ['All', 'Bridal', 'Balayage', 'Blonde', 'Extensions', 'Event Hair'];
+const filters = ['All', 'Bridal', 'Balayage', 'Extensions', 'Event Hair'];
 
 function GalleryCard({ item, onOpen }: { item: Item; onOpen: (src: string) => void }) {
   const [failed, setFailed] = useState(false);

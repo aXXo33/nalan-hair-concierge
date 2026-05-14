@@ -64,11 +64,11 @@ export default function Bridal() {
     const url = 'https://wa.me/' + NALAN_WHATSAPP + '?text=' + encodeURIComponent(message);
 
     dispatch({
-      type: 'ADD_BRIDAL',
+      type: 'addBridal',
       payload: {
         ...form,
         id: newId(),
-        createdAt: Date.now(),
+        createdAt: new Date().toISOString(),
         contacted: false,
       },
     });
@@ -88,11 +88,8 @@ export default function Bridal() {
 
   return (
     <div className="page">
-      <SectionTitle
-        eyebrow="Bridal Consultation"
-        title="Your wedding day, beautifully planned"
-        subtitle="Tell us about your wedding day and we'll help shape a bridal hair plan that feels elegant, calm and personal."
-      />
+      <SectionTitle eyebrow="Bridal Consultation" title="Your wedding day, beautifully planned" />
+      <p className="page-subtitle">Tell us about your wedding day and we'll help shape a bridal hair plan that feels elegant, calm and personal.</p>
       <form onSubmit={handleSubmit} className="form">
         <div className="eyebrow">About you</div>
         <label className="field">
@@ -142,14 +139,14 @@ export default function Bridal() {
 
         <div className="eyebrow">Inspiration</div>
         <p className="form-helper">A single inspiration image helps us understand the mood you envision. After submitting, you will be asked to attach it in WhatsApp.</p>
-        <FileDrop label="Inspiration photo" value={form.inspirationPhoto ? [form.inspirationPhoto] : []} onChange={(files) => update('inspirationPhoto', files[0] || null)} />
+        <FileDrop label="Inspiration photo" values={form.inspirationPhoto ? [form.inspirationPhoto] : []} onChange={(urls) => update('inspirationPhoto', urls[0] || null)} />
 
         <label className="field">
           <span>Notes</span>
           <textarea value={form.notes} onChange={(e) => update('notes', e.target.value)} rows={3} placeholder="Veil, accessories, anything we should know..." />
         </label>
 
-        <button type="submit" className="btn-primary">Create My Bridal Hair Plan</button>
+        <button type="submit" className="btn btn-primary btn-block">Create My Bridal Hair Plan</button>
         <p className="form-helper" style={{textAlign: 'center', marginTop: '12px'}}>Submitting will open WhatsApp so you can send your request directly to Nalan.</p>
       </form>
     </div>

@@ -41,7 +41,7 @@ export default function Quote() {
   }
 
   function buildWhatsAppMessage() {
-    const treatments = form.previousTreatments.length
+    const treatmentsLabel = form.previousTreatments.length
       ? form.previousTreatments.join(', ')
       : '—';
     const lines = [
@@ -53,7 +53,7 @@ export default function Quote() {
       'Current hair colour: ' + (form.currentColour || '—'),
       'Desired result: ' + (form.desiredResult || '—'),
       'Hair length: ' + form.hairLength,
-      'Previous treatments: ' + treatments,
+      'Previous treatments: ' + treatmentsLabel,
       'Preferred appointment date: ' + (form.preferredDate || '—'),
       'Notes: ' + (form.notes || '—'),
       '',
@@ -71,11 +71,11 @@ export default function Quote() {
     const url = 'https://wa.me/' + NALAN_WHATSAPP + '?text=' + encodeURIComponent(message);
 
     dispatch({
-      type: 'ADD_QUOTE',
+      type: 'addQuote',
       payload: {
         ...form,
         id: newId(),
-        createdAt: Date.now(),
+        createdAt: new Date().toISOString(),
         contacted: false,
       },
     });
@@ -95,11 +95,8 @@ export default function Quote() {
 
   return (
     <div className="page">
-      <SectionTitle
-        eyebrow="Hair Quote"
-        title="A bespoke colour plan"
-        subtitle="Share a few details about your hair and the result you have in mind. We reply personally, never automatically."
-      />
+      <SectionTitle eyebrow="Hair Quote" title="A bespoke colour plan" />
+      <p className="page-subtitle">Share a few details about your hair and the result you have in mind. We reply personally, never automatically.</p>
       <form onSubmit={handleSubmit} className="form">
         <div className="eyebrow">Your details</div>
         <label className="field">
@@ -141,8 +138,8 @@ export default function Quote() {
 
         <div className="eyebrow">Photos</div>
         <p className="form-helper">Natural daylight photos help us understand your current colour, condition and the safest route to your desired result. After submitting, you will be asked to attach them in WhatsApp.</p>
-        <FileDrop label="Current hair (front, side, back)" multiple value={form.currentPhotos} onChange={(files) => update('currentPhotos', files)} />
-        <FileDrop label="Inspiration photo" value={form.inspirationPhoto ? [form.inspirationPhoto] : []} onChange={(files) => update('inspirationPhoto', files[0] || null)} />
+        <FileDrop label="Current hair (front, side, back)" multiple values={form.currentPhotos} onChange={(urls) => update('currentPhotos', urls)} />
+        <FileDrop label="Inspiration photo" values={form.inspirationPhoto ? [form.inspirationPhoto] : []} onChange={(urls) => update('inspirationPhoto', urls[0] || null)} />
 
         <div className="eyebrow">Appointment</div>
         <label className="field">
@@ -154,7 +151,7 @@ export default function Quote() {
           <textarea value={form.notes} onChange={(e) => update('notes', e.target.value)} rows={3} placeholder="Anything else we should know..." />
         </label>
 
-        <button type="submit" className="btn-primary">Request My Hair Plan</button>
+        <button type="submit" className="btn btn-primary btn-block">Request My Hair Plan</button>
         <p className="form-helper" style={{textAlign: 'center', marginTop: '12px'}}>Submitting will open WhatsApp so you can send your request directly to Nalan.</p>
       </form>
     </div>

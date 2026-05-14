@@ -1,6 +1,8 @@
 import { Gift, Users, MessageCircle } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
-import { WHATSAPP } from '../lib/links';
+
+const VIP_WHATSAPP_MESSAGE = 'Hi Nalan, I’d like to ask about the Nalan VIP Circle offers.';
+const VIP_WHATSAPP_URL = `https://wa.me/447939535030?text=${encodeURIComponent(VIP_WHATSAPP_MESSAGE)}`;
 
 const rewards = [
   {
@@ -47,7 +49,7 @@ export default function Vip() {
 
       <div style={{ marginTop: 28, textAlign: 'center' }}>
         <a
-          href={WHATSAPP}
+          href={VIP_WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
           className="btn btn-primary btn-block"
